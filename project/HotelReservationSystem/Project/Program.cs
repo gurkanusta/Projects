@@ -326,6 +326,7 @@ class Program
 
     static void makeAReservation(Hotel hotel)
     {
+        //Kuallanıcıya yerleştirlecek olan müşterinin temel bilgileri soruldu.
         Console.Write("Customer name: ");
         string Name = Console.ReadLine();
 
@@ -339,7 +340,7 @@ class Program
             Console.WriteLine("Invalid number of people. Please enter a positive integer.");
             Console.Write("How many people?: ");
         }
-
+        //Müşterinin saatlik mi yoksa günlük mi kalıncağı soruldu.
         Console.Write("Stay hourly (1) or daily (2)? Enter 1 or 2: ");
         int stayOption;
         while (!int.TryParse(Console.ReadLine(), out stayOption) || (stayOption != 1 && stayOption != 2))
@@ -347,7 +348,7 @@ class Program
             Console.WriteLine("Invalid option. Please enter 1 for hourly or 2 for daily.");
             Console.Write("Stay hourly (1) or daily (2)? Enter 1 or 2: ");
         }
-
+        //Kullanıcıya eğer 1 seçilirse 1 ila 24 arasında bir saat seçilip hangi odayı kiralamak istendiği soruldu.
         if (stayOption == 1)
         {
             Console.Write("Number of Hours to Stay: ");
@@ -382,6 +383,7 @@ class Program
                 Console.WriteLine($"Room {RoomNumber} is full or invalid or has too many people.");
             }
         }
+        //Kullanıcıya eğer 2 seçilirse 1 ila 24 arasında bir saat seçilip hangi odayı kiralamak istendiği soruldu.
         else if (stayOption == 2)
         {
             Console.Write("Number of Days to Stay: ");
@@ -454,21 +456,23 @@ class Program
         }
 
     }
-
+    //Müşterinin bilgisini değiştirme fonksiyonu oluşturuldu.
     static void changeCustomerInformation(Hotel hotel)
     {
+        //Kullanıcıya değiştirlecek olan odanın hangisi olduğu soruldu.
         Console.Write("Enter the room number for which you want to change customer information:\n1-Normal ,\n 2-Normal Large ,\n 3-Premium ,\n 4-Premium Large ,\n 5-King Suite ,\n 6-King Suite Large\n: ");
         int roomNumber;
+        //while döngüsü içinde TryParse kullanılarak roomNumber'ın 1 ve 6 arasında olası sağlandı.
         while (!int.TryParse(Console.ReadLine(), out roomNumber) || roomNumber < 1 || roomNumber > 6)
         {
             Console.WriteLine("Invalid room number. Please enter again.");
             Console.Write("Enter the room number for which you want to change customer information:\n1-Normal ,\n 2-Normal Large ,\n 3-Premium ,\n 4-Premium Large ,\n 5-King Suite ,\n 6-King Suite Large\n: ");
         }
 
-        // Find the target room
+        // targetRoom bulundu
         Room targetRoom = hotel.Rooms.Find(room => room.roomNumber == roomNumber);
 
-        // Check if the room is not empty and has a reservation
+        // targetRoom'un boş olup olmadığı kontrol edilerek kullanıya değiştirilecek olan bilgiler soruldu.
         if (targetRoom != null && targetRoom.customerName != "")
         {
             Console.WriteLine($"Current Information for room {roomNumber}:");
@@ -511,7 +515,7 @@ class Program
         }
     }
 
-
+    //Kullanıcıya toplam ödenecek olan tutar gösterildi.
     static void viewTotalAmount(Hotel hotel)
     {
         decimal totalAmount = 0;
